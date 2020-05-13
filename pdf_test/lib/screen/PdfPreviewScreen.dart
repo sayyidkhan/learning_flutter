@@ -5,10 +5,11 @@ import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import 'package:printing/printing.dart';
 
 class PdfPreviewScreen extends StatelessWidget {
+  final Key key;
   final Uint8List pdfFile;
   final String path;
 
-  PdfPreviewScreen({this.pdfFile,this.path});
+  PdfPreviewScreen({this.key,this.pdfFile,this.path});
 
   Future printPdf(Uint8List pdf) async {
     await Printing.sharePdf(bytes: pdf, filename: 'my-document.pdf');
@@ -16,7 +17,10 @@ class PdfPreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final content = pdfFile;
+
     return PDFViewerScaffold(
+      key: key,
       appBar: AppBar(
           title: Text("PDF Preview"),
           actions: <Widget>[
