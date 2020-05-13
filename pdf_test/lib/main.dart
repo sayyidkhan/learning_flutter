@@ -29,7 +29,7 @@ class MyHomePage extends StatelessWidget {
   final pdf = pw.Document();
 
   void writeOnPdf() {
-    Content2.pdfVersion2(pdf);
+    Content2.pdfVersion1(pdf);
   }
 
   Future savePdf() async{
