@@ -87,7 +87,7 @@ class Content2 {
 //              style:
             ),
             widgets.Text(
-              "No. 01/12/2019",
+              "No: 01/12/2019",
 //              style: widgets.TextStyle(
 //                font: ralewayBold,
 //                fontSize: 24.0,
@@ -166,6 +166,7 @@ class Content2 {
                   ["No","Service","Net Price","VAT Rate","Total Gross"],
                   ["1","Flutter Development","\$1000","-","\$1000"],
                   ["2","Gatsby Development","\$500","-","\$500"],
+                  ["3","React Development","\$5000","-","\$5000"],
                 ]
             ),
             widgets.SizedBox(height: 1.0 * PdfPageFormat.cm),

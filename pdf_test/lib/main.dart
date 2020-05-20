@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Invoice App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
           icon: const Icon(Icons.add),
           tooltip: 'add new invoice',
           onPressed: () {
-            Navigator.pushNamed(context,  FormScreen.routeName );
+            Navigator.pushNamed( context,  FormScreen.routeName );
           }
         ),
       ),

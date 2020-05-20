@@ -11,7 +11,7 @@ class FormScreen extends StatefulWidget {
 
 class FormScreenState extends State<FormScreen> {
 
-  String _name;
+  String _invoiceNumber;
   String _email;
   String _password;
   String _url;
@@ -20,24 +20,24 @@ class FormScreenState extends State<FormScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget _buildName() {
+  Widget _buildInvoiceNumber() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Name'),
+      decoration: InputDecoration(labelText: 'Invoice No:'),
       maxLength: 10,
       validator: (String value) {
         if (value.isEmpty) {
-          return 'Name is Required';
+          return 'Invoice Number is Required';
         }
-
         return null;
       },
       onSaved: (String value) {
-        _name = value;
+        _invoiceNumber = value;
       },
     );
   }
 
   Widget _buildEmail() {
+    const regExp = r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
     return TextFormField(
       decoration: InputDecoration(labelText: 'Email'),
       validator: (String value) {
@@ -45,8 +45,7 @@ class FormScreenState extends State<FormScreen> {
           return 'Email is Required';
         }
 
-        if (!RegExp(
-            r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+        if (!RegExp(regExp)
             .hasMatch(value)) {
           return 'Please enter a valid email Address';
         }
@@ -132,7 +131,7 @@ class FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Form Demo")),
+      appBar: AppBar(title: Text("Create a New Invoice")),
       body: Container(
         margin: EdgeInsets.all(24),
         child: Form(
@@ -140,7 +139,7 @@ class FormScreenState extends State<FormScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _buildName(),
+              _buildInvoiceNumber(),
               _buildEmail(),
               _buildPassword(),
               _builURL(),
@@ -159,7 +158,7 @@ class FormScreenState extends State<FormScreen> {
 
                   _formKey.currentState.save();
 
-                  print(_name);
+                  print(_invoiceNumber);
                   print(_email);
                   print(_phoneNumber);
                   print(_url);
@@ -168,7 +167,19 @@ class FormScreenState extends State<FormScreen> {
 
                   //Send to API
                 },
-              )
+              ),
+              RawMaterialButton(
+                onPressed: () {},
+                elevation: 2.0,
+                fillColor: Colors.blue,
+                child: Icon(
+                  Icons.add,
+                  size: 15.0,
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.all(15.0),
+                shape: CircleBorder(),
+              ),
             ],
           ),
         ),
