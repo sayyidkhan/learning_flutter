@@ -36,17 +36,20 @@ class MyHomePage extends StatelessWidget {
       body:
       listArray.isEmpty ?
         InvoiceOverviewWidget.emptyList() :
-        ListView(
-          children: ListTile.divideTiles(
-            context: context,
-            tiles: listArray
-          ).toList(),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: listArray
+            ).toList(),
+          ),
         ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: IconButton(
           icon: const Icon(Icons.add),
-          tooltip: 'add new invoice',
+          tooltip: 'Add New Invoice',
           onPressed: () {
             Navigator.pushNamed( context,  FormScreen.routeName );
           }

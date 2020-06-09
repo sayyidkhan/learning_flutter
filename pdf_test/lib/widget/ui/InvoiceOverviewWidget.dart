@@ -22,10 +22,6 @@ class InvoiceOverviewWidget {
       int pdfContent) {
     return ListTile(
       contentPadding: EdgeInsets.all(15),
-      leading: Icon(
-        Icons.picture_as_pdf,
-        size: 50.0,
-      ),
       title: Text(title),
       subtitle: Text(subtitle),
       trailing: Wrap(

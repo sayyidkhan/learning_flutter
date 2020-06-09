@@ -84,26 +84,37 @@ class Content2 {
           children: <widgets.Widget>[
             widgets.Text(
               "Invoice",
-//              style:
+              style: widgets.TextStyle(fontSize: 36,fontWeight: widgets.FontWeight.bold),
             ),
-            widgets.Text(
-              "No: 01/12/2019",
-//              style: widgets.TextStyle(
-//                font: ralewayBold,
-//                fontSize: 24.0,
-//              ),
+            widgets.Row(
+              mainAxisAlignment: widgets.MainAxisAlignment.center,
+              children: <widgets.Widget>[
+                widgets.Text("No: ", style: widgets.TextStyle(fontSize: 24.0,),),
+                widgets.Padding(
+                  padding: const widgets.EdgeInsets.only(top: 2),
+                  child :  widgets.Text("T000001",  style: widgets.TextStyle(fontSize: 20.0,fontWeight: widgets.FontWeight.normal)),
+                ),
+              ],
             ),
-            widgets.Text(
-              "Date of issue: 01.12.2019",
-//              style: widgets.TextStyle(font: ralewayRegular),
+            widgets.Row(
+              mainAxisAlignment: widgets.MainAxisAlignment.center,
+              children: <widgets.Widget>[
+                widgets.Text("Date of issue: ", style: widgets.TextStyle(fontSize: 16.0,),),
+                widgets.Padding(
+                  padding: const widgets.EdgeInsets.only(top: 2),
+                  child : widgets.Text("01/12/2020",  style: widgets.TextStyle(fontSize: 14.0,fontWeight: widgets.FontWeight.normal)),
+                ),
+              ],
             ),
-            widgets.Text(
-              "Date of service: 01.12.2019",
-//              style: widgets.TextStyle(font: ralewayRegular),
-            ),
-            widgets.Text(
-              "Place of issue: Przemysl",
-//              style: widgets.TextStyle(font: ralewayRegular),
+            widgets.Row(
+              mainAxisAlignment: widgets.MainAxisAlignment.center,
+              children: <widgets.Widget>[
+                widgets.Text("Date Of Service: ", style: widgets.TextStyle(fontSize: 16.0,),),
+                widgets.Padding(
+                  padding: const widgets.EdgeInsets.only(top: 2),
+                  child : widgets.Text("01/12/2020 - 31/12/2020",  style: widgets.TextStyle(fontSize: 14.0,fontWeight: widgets.FontWeight.normal)),
+                ),
+              ],
             ),
             widgets.SizedBox(height: 2.0 * PdfPageFormat.cm),
             widgets.Row(
@@ -112,6 +123,10 @@ class Content2 {
                 widgets.Column(
                     crossAxisAlignment: widgets.CrossAxisAlignment.start,
                     children: <widgets.Widget>[
+                      widgets.Text(
+                        "Contract Partner",
+                        style: widgets.TextStyle(fontWeight: widgets.FontWeight.bold,decoration: widgets.TextDecoration.underline),
+                      ),
                       widgets.Text(
                         "Fantasy company Ltd.",
 //                        style: widgets.TextStyle(font: ralewayBold),
@@ -137,8 +152,11 @@ class Content2 {
                     crossAxisAlignment: widgets.CrossAxisAlignment.start,
                     children: <widgets.Widget>[
                       widgets.Text(
+                        "Bill To",
+                        style: widgets.TextStyle(fontWeight: widgets.FontWeight.bold,decoration: widgets.TextDecoration.underline),
+                      ),
+                      widgets.Text(
                         "otherland labs sp. z o.o.",
-//                        style: widgets.TextStyle(font: ralewayBold),
                       ),
                       widgets.Text(
                         "Joze korzeniowkiego 11/4",
@@ -163,7 +181,7 @@ class Content2 {
             widgets.Table.fromTextArray(
                 context: context,
                 data: [
-                  ["No","Service","Net Price","VAT Rate","Total Gross"],
+                  ["No","Service","Net Price","GST Rate","Total Gross"],
                   ["1","Flutter Development","\$1000","-","\$1000"],
                   ["2","Gatsby Development","\$500","-","\$500"],
                   ["3","React Development","\$5000","-","\$5000"],
@@ -173,8 +191,15 @@ class Content2 {
             widgets.Row(
                 children: <widgets.Widget>[
                   widgets.Expanded(child: widgets.Container()),
-                  widgets.Text("To pay: \$1500",
-//                      style: widgets.TextStyle(font: ralewayBold,fontSize: 18.0)
+                  widgets.Row(
+                    mainAxisAlignment: widgets.MainAxisAlignment.center,
+                    children: <widgets.Widget>[
+                      widgets.Text("To Pay: ", style: widgets.TextStyle(fontSize: 20.0,),),
+                      widgets.Padding(
+                        padding: const widgets.EdgeInsets.only(top: 2),
+                        child :  widgets.Text("\$1500",  style: widgets.TextStyle(fontSize: 18.0,fontWeight: widgets.FontWeight.bold)),
+                      ),
+                    ],
                   ),
                 ]
             ),
