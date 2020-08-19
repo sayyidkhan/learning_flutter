@@ -143,10 +143,6 @@ class Content2 {
                         "United States of America",
 //                        style: widgets.TextStyle(font: ralewayRegular),
                       ),
-                      widgets.Text(
-                        "Tax ID: 123141434",
-//                        style: widgets.TextStyle(font: ralewayRegular),
-                      ),
                     ]),
                 widgets.Column(
                     crossAxisAlignment: widgets.CrossAxisAlignment.start,
@@ -168,10 +164,6 @@ class Content2 {
                       ),
                       widgets.Text(
                         "Poland",
-//                        style: widgets.TextStyle(font: ralewayRegular),
-                      ),
-                      widgets.Text(
-                        "Tax ID: 123141434",
 //                        style: widgets.TextStyle(font: ralewayRegular),
                       ),
                     ]),

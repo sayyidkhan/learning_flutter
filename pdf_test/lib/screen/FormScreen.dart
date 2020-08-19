@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart' as normalDatePicker;
 import 'package:flutter/material.dart';
+import 'package:pdf_test/widget/ui/form/InvoiceWidget.dart';
 
 class FormScreen extends StatefulWidget {
   static const routeName = '/cart';
@@ -20,6 +21,7 @@ class FormScreenState extends State<FormScreen> {
 
   TextEditingController _dateOfIssueTxtCtrl = new TextEditingController();
 
+  //invoice details variables
   String _invoiceNumber;
   String _dateOfIssue;
   DateOfService _dateOfService= new DateOfService.empty();
@@ -28,6 +30,15 @@ class FormScreenState extends State<FormScreen> {
   String _url;
   String _phoneNumber;
 
+  //contact detail variables
+  String _yourCompanyName;
+  String _addressLine1;
+  String _addressLine2;
+  String _addressLine3;
+  String _billToCompanyName;
+  String _billToAddressLine1;
+  String _billToAddressLine2;
+  String _billToAddressLine3;
 
   @override
   void initState() {
@@ -62,14 +73,121 @@ class FormScreenState extends State<FormScreen> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              _buildListView("Invoice Details",_buildInvoiceNumber()),
-              _buildDateOfIssue(),
-              _subHeaderTitle("Date Of Service"),
-              _buildDateOfService(),
-              _buildEmail(),
-              _buildPassword(),
-              _builURL(),
-              _buildPhoneNumber(),
+              //need to turn cardWidget into its own class
+              InvoiceWidget(
+                title: "Invoice Details",
+                icons: Icon(Icons.textsms),
+                myInnerComponents: Column(
+                  children: <Widget>[
+                    _buildTextField(
+                      labelText: "Invoice No",
+                      textFieldMaxLength: 10,
+                      errorMessage: 'Invoice Number is Required',
+                      inputValue: _invoiceNumber,
+                      validationRequired: true,
+                    ),
+                    _buildDateOfIssue(),
+                    _subHeaderTitle("Date Of Service"),
+                    _buildDateOfService(),
+                  ],
+                ),
+              ),
+              InvoiceWidget(
+                title: "Contact Details",
+                icons: Icon(Icons.perm_contact_calendar),
+                myInnerComponents: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20,bottom: 0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Contractor Details",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            decoration:TextDecoration.underline,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.grey.shade700,
+                          ),
+                        ),
+                      ),
+                    ),
+                    _buildTextField(
+                      labelText: "Company Name",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Company Name is Required',
+                      inputValue: _yourCompanyName,
+                      validationRequired: true,
+                    ),
+                    _buildTextField(
+                      labelText: "Address Line 1",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Address Line 1 cannot be empty',
+                      inputValue: _addressLine1,
+                      validationRequired: true,
+                    ),
+                    _buildTextField(
+                      labelText: "Address Line 2",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Address Line 1 cannot be empty',
+                      inputValue: _addressLine2,
+                    ),
+                    _buildTextField(
+                      labelText: "Address Line 3",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Address Line 1 cannot be empty',
+                      inputValue: _addressLine3,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20,bottom: 0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Bill To",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            decoration:TextDecoration.underline,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.grey.shade700,
+                          ),
+                        ),
+                      ),
+                    ),
+                    _buildTextField(
+                      labelText: "Company Name",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Company Name is Required',
+                      inputValue: _billToCompanyName,
+                      validationRequired: true,
+                    ),
+                    _buildTextField(
+                      labelText: "Address Line 1",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Address Line 1 cannot be empty',
+                      inputValue: _billToAddressLine1,
+                      validationRequired: true,
+                    ),
+                    _buildTextField(
+                      labelText: "Address Line 2",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Address Line 1 cannot be empty',
+                      inputValue: _billToAddressLine2,
+                    ),
+                    _buildTextField(
+                      labelText: "Address Line 3",
+                      textFieldMaxLength: 30,
+                      errorMessage: 'Address Line 1 cannot be empty',
+                      inputValue: _billToAddressLine3,
+                    ),
+                  ],
+                ),
+              ),
+//              _buildEmail(),
+//              _buildPassword(),
+//              _builURL(),
+//              _buildPhoneNumber(),
 
               SizedBox(height: 100),
 
@@ -87,7 +205,6 @@ class FormScreenState extends State<FormScreen> {
                     if (picked != null) {
                       print(picked);
                     }
-
                   },
                   child: new Text("Pick date range")
               ),
@@ -136,40 +253,61 @@ class FormScreenState extends State<FormScreen> {
   Widget _buildListView(String title,Widget widget) {
     bool _isCollapsed = false;
 
-    return Column(
-      children: [
-        Card(
-          color: Theme.of(context).primaryColor,
-          child: ListTile(
-            title: Padding(
-              padding: const EdgeInsets.only(left:26.0),
-              child: Center(
-                  child: Text(title,style: TextStyle(color: Colors.white)
-                  )
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      borderOnForeground: true,
+      child: Column(
+        children: [
+          Container(
+            color: Theme.of(context).primaryColor,
+            child: ListTile(
+              title: Padding(
+                padding: const EdgeInsets.only(left:26.0),
+                child: Center(
+                    child: Text(title,style: TextStyle(color: Colors.white)
+                    )
+                ),
               ),
+              trailing: Icon(Icons.arrow_right,color: Colors.white,),
             ),
-            trailing: Icon(Icons.arrow_right,color: Colors.white,),
           ),
-        ),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
-            child: widget,
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
+              child: widget
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildInvoiceNumber() {
+  Widget _buildTextField({
+  String labelText,
+  int textFieldMaxLength,
+  String errorMessage,
+  Object inputValue,
+  bool validationRequired = false,
+  }) {
+    if(validationRequired){
+      return TextFormField(
+        decoration: InputDecoration(labelText: labelText),
+        maxLength: textFieldMaxLength,
+        validator: (String value) {
+          return value.isEmpty ? errorMessage : null;
+        },
+        onSaved: (String value) {
+          inputValue = value;
+        },
+      );
+    }
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Invoice No'),
-      maxLength: 10,
-      validator: (String value) {
-        return value.isEmpty ? 'Invoice Number is Required' : null;
-      },
+      decoration: InputDecoration(labelText: labelText),
+      maxLength: textFieldMaxLength,
       onSaved: (String value) {
-        _invoiceNumber = value;
+        inputValue = value;
       },
     );
   }
@@ -191,7 +329,7 @@ class FormScreenState extends State<FormScreen> {
           ),
           SizedBox(width: 10,),
           Padding(
-            padding: const EdgeInsets.only(left: 10,top: 20,right: 10),
+            padding: const EdgeInsets.only(left: 2,top: 20,right: 2),
             child: Container(
                   decoration: BoxDecoration(
                   border: Border.all(
@@ -234,10 +372,10 @@ class FormScreenState extends State<FormScreen> {
 
   Padding _subHeaderTitle(String title) {
     return Padding(
-      padding: EdgeInsets.only(right: 25.0, top: 25.0),
+      padding: EdgeInsets.only(top: 25.0),
       child: new Text(
         title,
-        style: TextStyle(fontSize: 16.0,color: Colors.grey[600],fontWeight: FontWeight.w400),
+        style: TextStyle(fontSize: 16.0,color: Colors.grey[600],fontWeight: FontWeight.w300,),
       ),
     );
   }
@@ -248,7 +386,7 @@ class FormScreenState extends State<FormScreen> {
         Expanded(
           child: TextFormField(
             controller: _dateOfService.firstDateTxtCtrl,
-            decoration: InputDecoration(labelText: 'Date From'),
+            decoration: InputDecoration(labelText: 'From'),
             validator: (String value) {
               return value.isEmpty ? 'Date of Service is Required' : null;
             },
@@ -261,7 +399,7 @@ class FormScreenState extends State<FormScreen> {
         Expanded(
           child: TextFormField(
             controller: _dateOfService.lastDateTxtCtrl,
-            decoration: InputDecoration(labelText: 'Date To'),
+            decoration: InputDecoration(labelText: 'To'),
             validator: (String value) {
               return value.isEmpty ? 'Date of Service is Required' : null;
             },
@@ -272,7 +410,7 @@ class FormScreenState extends State<FormScreen> {
         ),
         SizedBox(width: 10,),
         Padding(
-          padding: const EdgeInsets.only(left: 10,top: 20,right: 10),
+          padding: const EdgeInsets.only(left: 2,top: 20,right: 2),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
