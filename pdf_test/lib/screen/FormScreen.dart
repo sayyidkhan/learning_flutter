@@ -1,9 +1,10 @@
 import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_rounded_date_picker/rounded_picker.dart' as normalDatePicker;
 import 'package:flutter/material.dart';
+import 'package:pdf_test/database/PdfForm.dart';
 import 'package:pdf_test/widget/ui/form/InvoiceWidget.dart';
+import 'package:pdf_test/widget/ui/form/ServiceDetailsWidget.dart';
 
 class FormScreen extends StatefulWidget {
   static const routeName = '/cart';
@@ -183,6 +184,11 @@ class FormScreenState extends State<FormScreen> {
                     ),
                   ],
                 ),
+              ),
+
+              ServiceDetailWidget(
+                title: "Service Details",
+                icons: Icon(Icons.receipt),
               ),
 //              _buildEmail(),
 //              _buildPassword(),
@@ -523,25 +529,6 @@ class FormScreenState extends State<FormScreen> {
         _url = value;
       },
     );
-  }
-
-}
-
-class DateOfService {
-  TextEditingController firstDateTxtCtrl = new TextEditingController();
-  TextEditingController lastDateTxtCtrl = new TextEditingController();
-
-  String firstDate;
-  String lastDate;
-
-  DateOfService.empty(){
-    firstDateTxtCtrl.text = this.firstDate;
-    lastDateTxtCtrl.text = this.lastDate;
-  }
-
-  DateOfService({this.firstDate, this.lastDate}){
-    firstDateTxtCtrl.text = this.firstDate;
-    lastDateTxtCtrl.text = this.lastDate;
   }
 
 }

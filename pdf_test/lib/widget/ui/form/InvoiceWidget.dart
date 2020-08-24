@@ -28,7 +28,10 @@ class _InvoiceWidgetState extends State<InvoiceWidget> {
             AppBar(
               leading: widget.icons,
               elevation: 0,
-              title: Text(widget.title),
+              title: Text(
+                  widget.title,
+                  style: TextStyle(fontSize: 18),
+              ),
               backgroundColor: Theme.of(context).accentColor,
               centerTitle: true,
               actions: <Widget>[toggleArrowButton()],
