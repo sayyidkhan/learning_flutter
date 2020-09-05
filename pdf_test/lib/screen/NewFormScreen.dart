@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf_test/database/PdfForm.dart';
 import 'package:pdf_test/widget/ui/form/InvoiceDetailWidget.dart';
 
 class NewFormScreen extends StatefulWidget {
@@ -9,7 +10,36 @@ class NewFormScreen extends StatefulWidget {
 }
 
 class _NewFormScreenState extends State<NewFormScreen> {
+  final List<Widget> list = new List();
   int currentPagination = 1;
+  OverallInvoice overallInvoice;
+
+  @override
+  void initState() {
+    super.initState();
+    initPageDetail();
+    overallInvoice = new OverallInvoice();
+  }
+
+  @override
+  void dispose() {
+    overallInvoice = null;
+    super.dispose();
+  }
+
+  List<Widget> initPageDetail() {
+    //first page
+    list.add(InvoiceDetailWidget());
+    //second page
+    list.add(InvoiceDetailWidget());
+    //third page
+    list.add(InvoiceDetailWidget());
+    return list;
+  }
+
+  Widget accessPageDetail(int i) {
+    return list[i];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +54,11 @@ class _NewFormScreenState extends State<NewFormScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              pagination(1,"Invoice"),
+              pagination(1, "Invoice"),
               paginationBlocks(),
-              pagination(2,"Contact"),
+              pagination(2, "Contact"),
               paginationBlocks(),
-              pagination(3,"Item List"),
+              pagination(3, "Item List"),
             ],
           ),
           const SizedBox(
@@ -36,20 +66,45 @@ class _NewFormScreenState extends State<NewFormScreen> {
           ),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.only(left: 30,right: 30,),
+              padding: const EdgeInsets.only(
+                left: 30,
+                right: 30,
+              ),
               child: Center(
-                child: InvoiceDetailWidget(),
+                child: accessPageDetail(currentPagination - 1),
               ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey[500],
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              height: 40,
+              width: double.infinity,
+              child: FlatButton(
+                textColor: Theme.of(context).primaryColor,
+                onPressed: () {
+
+                },
+                child: Text("Next",style: TextStyle(fontWeight: FontWeight.normal),),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget pagination(int number,String title) {
-    var colorBox = number <= currentPagination ? Colors.blue : Colors.grey.shade300;
-    var textBold = number <= currentPagination ? FontWeight.bold : FontWeight.normal;
+  Widget pagination(int number, String title) {
+    var colorBox =
+        number <= currentPagination ? Colors.blue : Colors.grey.shade300;
+    var textBold =
+        number <= currentPagination ? FontWeight.bold : FontWeight.normal;
 
     return GestureDetector(
       onTap: () {
@@ -70,8 +125,13 @@ class _NewFormScreenState extends State<NewFormScreen> {
               style: TextStyle(fontWeight: textBold),
             )),
           ),
-          SizedBox(height: 5,),
-          Text("$title details",style: TextStyle(fontSize: 12,fontWeight: textBold),),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "$title details",
+            style: TextStyle(fontSize: 12, fontWeight: textBold),
+          ),
         ]),
       ),
     );
@@ -79,7 +139,7 @@ class _NewFormScreenState extends State<NewFormScreen> {
 
   Widget paginationBlocks() {
     return Padding(
-      padding: const EdgeInsets.only(left: 2.5, right: 2.5,bottom: 15),
+      padding: const EdgeInsets.only(left: 2.5, right: 2.5, bottom: 15),
       child: Container(
         width: 10,
         height: 10,

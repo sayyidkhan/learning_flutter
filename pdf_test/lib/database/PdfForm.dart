@@ -30,6 +30,19 @@ class ServiceDetails {
 
 }
 
+class OverallInvoice {
+  InvoiceDetails invoiceDetails;
+  ContactDetails contactDetails;
+  ServiceDetails serviceDetails;
+
+  OverallInvoice(){
+    invoiceDetails = new InvoiceDetails();
+    contactDetails = new ContactDetails();
+    serviceDetails = new ServiceDetails();
+  }
+
+}
+
 class DateOfService {
   TextEditingController firstDateTxtCtrl = new TextEditingController();
   TextEditingController lastDateTxtCtrl = new TextEditingController();
@@ -48,3 +61,4 @@ class DateOfService {
   }
 
 }
+
